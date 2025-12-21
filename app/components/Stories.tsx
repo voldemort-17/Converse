@@ -17,7 +17,7 @@ const Stories = async () => {
                     user: {
                         followers: {
                             some: {
-                                followerId: currentUserId
+                                followingId: currentUserId
                             }
                         }
                     }
@@ -31,6 +31,8 @@ const Stories = async () => {
             user: true
         }
     })
+
+    console.log("STORIESL:", stories);
 
     return (
         <div className="p-4 bg-[#121212] rounded-lg text-sm shadow-md overflow-scroll scroll-smooth scrollbar-hide">
