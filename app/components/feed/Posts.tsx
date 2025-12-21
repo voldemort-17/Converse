@@ -4,6 +4,7 @@ import { Post, User } from "@prisma/client"
 import PostInteraction from "./PostInteraction"
 import { Suspense } from "react"
 import PostData from "./PostData"
+import Link from "next/link"
 
 type PostType = Post & { user: User } & { likes: [{ userId: string }] } & { _count: { comments: number } }
 
@@ -15,7 +16,7 @@ const Posts = ({ post, currentUser }: { post: PostType, currentUser: string }) =
                 <div className="flex justify-between items-center">
                     <div className="flex flex-1 items-center gap-4 font-bold text-white">
                         <Image src={post.user.avatar || '/AvatarImage.jpg'} alt='Avatar' height={40} width={40} className="cursor-pointer rounded-[50%] w-10 h-10 object-cover" />
-                        <span className="cursor-pointer">{(post.user.name && post.user.surname) ? post.user.name + " " + post.user.surname : post.user?.username}</span>
+                        <Link href={`/profile/${post.user?.username}`}><span className="cursor-pointer">{(post.user.name && post.user.surname) ? post.user.name + " " + post.user.surname : post.user?.username}</span></Link>
                     </div>
                     {currentUser === post.user.id && <PostData postId={post.id}/>}
                 </div>
